@@ -1,6 +1,6 @@
-# 🧹 [Flask URL Cleaner](https://github.com/ronknight/flask-url-cleaner)
+# <h1 align="center">🧹 [Flask URL Cleaner](https://github.com/ronknight/flask-url-cleaner) </h1>
 
-#### A simple Flask web application that removes the 'csrfToken' parameter from URLs.
+#### <h4 align="center">A simple Flask web application that removes the 'csrfToken' parameter from URLs.</h4>
 
 <p align="center">
 <a href="https://twitter.com/PinoyITSolution"><img src="https://img.shields.io/twitter/follow/PinoyITSolution?style=social"></a>
