@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Cleaner</title>
+</head>
+<body>
+    <h1>Flask URL Cleaner</h1>
+    
+    <!-- Simple Form for URL Input -->
+    <form id="url-form" onsubmit="event.preventDefault(); sendRequest();">
+        <label for="url-input">Enter URL to clean:</label>
+        <input type="text" id="url-input" name="url" placeholder="Enter URL" required>
+        <button type="submit">Clean URL</button>
+    </form>
+
+    <h2>Cleaned URL:</h2>
+    <p id="result"></p>
+
+    <script>
+        function sendRequest() {
+            const url = document.getElementById('url-input').value;
+
+            fetch('http://10.0.6.105:5000/clean_url', { // Use your local network IP address here
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: url }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').textContent = data.cleaned_url;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                document.getElementById('result').textContent = "Error: Failed to clean URL.";
+            });
+        }
+    </script>
+</body>
+</html>
