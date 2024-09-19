@@ -1,13 +1,17 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/clean_url', methods=['POST'])
 def clean_url():
     data = request.json
     url = data.get('url', '')
-    
+
     # Parse the URL
     parsed_url = urlparse(url)
     query_params = parse_qs(parsed_url.query)
