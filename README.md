@@ -1,5 +1,7 @@
 # 🧹 [Flask URL Cleaner](https://github.com/ronknight/flask-url-cleaner)
+# 🧹 [Flask URL Cleaner](https://github.com/ronknight/flask-url-cleaner)
 
+#### A simple Flask web application that removes the 'csrfToken' parameter from URLs.
 #### A simple Flask web application that removes the 'csrfToken' parameter from URLs.
 
 <p align="center">
@@ -19,6 +21,7 @@
   <a href="#requirements">Requirements</a> •
   <a href="#installation">Installation</a> •
   <a href="#project-structure">Project Structure</a> •
+  <a href="#project-structure">Project Structure</a> •
   <a href="#usage">Usage</a> •
   <a href="#api-endpoint">API Endpoint</a> •
   <a href="#example">Example</a> •
@@ -30,6 +33,8 @@
 ## 🌟 Features
 
 - Removes the 'csrfToken' parameter from URLs
+- Simple Flask web application with a user interface
+- API endpoint for programmatic access
 - Simple Flask web application with a user interface
 - API endpoint for programmatic access
 - Easily integrable into larger projects

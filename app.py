@@ -1,3 +1,4 @@
+from flask import Flask, render_template, request, jsonify
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
@@ -10,11 +11,15 @@ CORS(app)  # Enable CORS for all routes
 def index():
     return send_from_directory('', 'index.html')
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 @app.route('/clean_url', methods=['POST'])
 def clean_url():
     data = request.json
     url = data.get('url', '')
-    
+
     # Parse the URL
     parsed_url = urlparse(url)
     query_params = parse_qs(parsed_url.query)
@@ -37,5 +42,4 @@ def clean_url():
     return jsonify({'cleaned_url': cleaned_url})
 
 if __name__ == '__main__':
-    # Allow external access on the local network
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True)
