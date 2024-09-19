@@ -106,7 +106,7 @@ Expected output:
 
 The application includes a web interface for easy URL cleaning:
 
-1. Open your web browser and go to `http://127.0.0.1:5000/` or use your local network IP address (e.g., `http://10.0.6.105:5000/`)
+1. Open your web browser and go to `http://127.0.0.1:5000/` or use your local network IP address (e.g., `http://192.168.1.200:5000/`)
 2. You'll see a form with the title "Enter a URL to Clean"
 3. Enter the URL you want to clean in the provided input field
 4. Click the "Clean URL" button
