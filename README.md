@@ -1,26 +1,11 @@
 # 🧹 [Flask URL Cleaner](https://github.com/ronknight/flask-url-cleaner)
-# 🧹 [Flask URL Cleaner](https://github.com/ronknight/flask-url-cleaner)
 
 #### A simple Flask web application that removes the 'csrfToken' parameter from URLs.
-#### A simple Flask web application that removes the 'csrfToken' parameter from URLs.
-
-<p align="center">
-<a href="https://twitter.com/PinoyITSolution"><img src="https://img.shields.io/twitter/follow/PinoyITSolution?style=social"></a>
-<a href="https://github.com/ronknight?tab=followers"><img src="https://img.shields.io/github/followers/ronknight?style=social"></a>
-<a href="https://github.com/ronknight/ronknight/stargazers"><img src="https://img.shields.io/github/stars/BEPb/BEPb.svg?logo=github"></a>
-<a href="https://github.com/ronknight/ronknight/network/members"><img src="https://img.shields.io/github/forks/BEPb/BEPb.svg?color=blue&logo=github"></a>
-<a href="https://youtube.com/@PinoyITSolution"><img src="https://img.shields.io/youtube/channel/subscribers/UCeoETAlg3skyMcQPqr97omg"></a>
-<a href="https://github.com/ronknight/flask-url-cleaner/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
-<a href="https://github.com/ronknight/flask-url-cleaner/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
-<a href="#"><img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg"></a>
-<a href="https://github.com/ronknight"><img src="https://img.shields.io/badge/Made%20with%20%F0%9F%A4%8D%20by%20-%20Ronknight%20-%20red"></a>
-</p>
 
 <p align="center">
   <a href="#features">Features</a> •
   <a href="#requirements">Requirements</a> •
   <a href="#installation">Installation</a> •
-  <a href="#project-structure">Project Structure</a> •
   <a href="#project-structure">Project Structure</a> •
   <a href="#usage">Usage</a> •
   <a href="#api-endpoint">API Endpoint</a> •
@@ -33,8 +18,6 @@
 ## 🌟 Features
 
 - Removes the 'csrfToken' parameter from URLs
-- Simple Flask web application with a user interface
-- API endpoint for programmatic access
 - Simple Flask web application with a user interface
 - API endpoint for programmatic access
 - Easily integrable into larger projects
@@ -66,22 +49,12 @@ flask-url-cleaner/
 │
 ├── app.py
 ├── README.md
-<<<<<<< HEAD
-└── templates/
-    └── index.html
-=======
 └── index.html
->>>>>>> 14a5905 (update files and readme.md)
 ```
 
 - `app.py`: The main Flask application file
 - `README.md`: This file, containing project information and instructions
-<<<<<<< HEAD
-- `templates/`: Directory for HTML templates
-  - `index.html`: The HTML template for the web interface
-=======
 - `index.html`: The HTML template for the web interface
->>>>>>> 14a5905 (update files and readme.md)
 
 ## 🚀 Usage
 
@@ -93,8 +66,6 @@ flask-url-cleaner/
 2. The server will start running on `http://127.0.0.1:5000/` and will be accessible on your local network.
 
 3. Open your web browser and navigate to `http://127.0.0.1:5000/` or use your local network IP address to access the application from other devices.
-
-3. Open your web browser and navigate to `http://127.0.0.1:5000/` to use the web interface
 
 ## 📡 API Endpoint
 
