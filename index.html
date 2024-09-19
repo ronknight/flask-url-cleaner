@@ -3,26 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Cleaner</title>
+    <title>4sgm URL Cleaner</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 5rem;
+        }
+
+        #response {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            background-color: #e9ecef;
+        }
+    </style>
 </head>
 <body>
-    <h1>Flask URL Cleaner</h1>
-    
-    <!-- Simple Form for URL Input -->
-    <form id="url-form" onsubmit="event.preventDefault(); sendRequest();">
-        <label for="url-input">Enter URL to clean:</label>
-        <input type="text" id="url-input" name="url" placeholder="Enter URL" required>
-        <button type="submit">Clean URL</button>
-    </form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Enter a URL to Clean</h1>
+                        <form id="url-form">
+                            <div class="form-group">
+                                <input type="text" id="url-input" class="form-control" placeholder="Enter URL here" required>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-block" onclick="sendRequest()">Clean URL</button>
+                        </form>
+                        <div id="response" class="text-center mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <h2>Cleaned URL:</h2>
-    <p id="result"></p>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         function sendRequest() {
             const url = document.getElementById('url-input').value;
-
-            fetch('http://10.0.6.105:5000/clean_url', { // Use your local network IP address here
+            fetch('/clean_url', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,11 +59,11 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').textContent = data.cleaned_url;
+                document.getElementById('response').innerHTML = `<strong>Cleaned URL:</strong> ${data.cleaned_url}`;
             })
-            .catch((error) => {
+            .catch(error => {
+                document.getElementById('response').innerHTML = '<strong>Error:</strong> Unable to clean the URL';
                 console.error('Error:', error);
-                document.getElementById('result').textContent = "Error: Failed to clean URL.";
             });
         }
     </script>
