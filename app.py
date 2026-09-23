@@ -15,13 +15,19 @@ def clean_url():
     data = request.json
     url = data.get('url', '')
     
-    # Parse the URL
+    # Parse the URL (keep_blank_values so we can see and drop empty params ourselves)
     parsed_url = urlparse(url)
-    query_params = parse_qs(parsed_url.query)
+    query_params = parse_qs(parsed_url.query, keep_blank_values=True)
 
-    # Remove csrfToken and its value
-    if 'csrfToken' in query_params:
-        del query_params['csrfToken']
+    # Remove csrfToken entirely
+    query_params.pop('csrfToken', None)
+
+    # Drop params with empty values, but never touch 'sort' even if blank
+    query_params = {
+        key: values
+        for key, values in query_params.items()
+        if key == 'sort' or any(value != '' for value in values)
+    }
 
     # Rebuild the URL with cleaned query parameters
     cleaned_query = urlencode(query_params, doseq=True)
@@ -38,4 +44,4 @@ def clean_url():
 
 if __name__ == '__main__':
     # Allow external access on the local network
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=os.getenv("FLASK_DEBUG", "0").lower() in ("1", "true", "yes"))

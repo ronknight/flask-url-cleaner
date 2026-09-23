@@ -38,6 +38,7 @@
                             <button type="button" class="btn btn-primary btn-block" onclick="sendRequest()">Clean URL</button>
                         </form>
                         <div id="response" class="text-center mt-3"></div>
+                        <button type="button" id="copy-btn" class="btn btn-secondary btn-block mt-2" style="display:none;" onclick="copyCleanedUrl()">Copy</button>
                     </div>
                 </div>
             </div>
@@ -48,8 +49,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        let cleanedUrl = '';
+
         function sendRequest() {
             const url = document.getElementById('url-input').value;
+            const copyBtn = document.getElementById('copy-btn');
             fetch('/clean_url', {
                 method: 'POST',
                 headers: {
@@ -59,11 +63,24 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('response').innerHTML = `<strong>Cleaned URL:</strong> ${data.cleaned_url}`;
+                cleanedUrl = data.cleaned_url;
+                document.getElementById('response').innerHTML = `<strong>Cleaned URL:</strong> ${cleanedUrl}`;
+                copyBtn.style.display = 'block';
+                copyBtn.textContent = 'Copy';
             })
             .catch(error => {
                 document.getElementById('response').innerHTML = '<strong>Error:</strong> Unable to clean the URL';
+                copyBtn.style.display = 'none';
                 console.error('Error:', error);
+            });
+        }
+
+        function copyCleanedUrl() {
+            if (!cleanedUrl) return;
+            navigator.clipboard.writeText(cleanedUrl).then(() => {
+                const copyBtn = document.getElementById('copy-btn');
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1500);
             });
         }
     </script>
