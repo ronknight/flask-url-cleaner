@@ -75,12 +75,33 @@
             });
         }
 
+        // navigator.clipboard only exists in secure contexts (HTTPS or localhost),
+        // so plain-HTTP access over the LAN needs the execCommand fallback.
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            const ok = document.execCommand('copy');
+            document.body.removeChild(textarea);
+            return ok ? Promise.resolve() : Promise.reject(new Error('execCommand copy failed'));
+        }
+
         function copyCleanedUrl() {
             if (!cleanedUrl) return;
-            navigator.clipboard.writeText(cleanedUrl).then(() => {
-                const copyBtn = document.getElementById('copy-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const copy = (navigator.clipboard && window.isSecureContext)
+                ? navigator.clipboard.writeText(cleanedUrl).catch(() => fallbackCopy(cleanedUrl))
+                : fallbackCopy(cleanedUrl);
+            copy.then(() => {
                 copyBtn.textContent = 'Copied!';
                 setTimeout(() => { copyBtn.textContent = 'Copy'; }, 1500);
+            }).catch(error => {
+                copyBtn.textContent = 'Copy failed';
+                console.error('Copy failed:', error);
             });
         }
     </script>
