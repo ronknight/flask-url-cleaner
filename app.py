@@ -17,7 +17,11 @@ def clean_url():
     
     # Parse the URL (keep_blank_values so we can see and drop empty params ourselves)
     parsed_url = urlparse(url)
-    query_params = parse_qs(parsed_url.query, keep_blank_values=True)
+    # A stray '?' inside the query ("??a=1", "&?a=1", "csrfToken=x?a=1") is a
+    # mis-joined separator; left alone it becomes part of a key that urlencode
+    # writes back as "?%3Fa=1", or hides the next param inside csrfToken's value.
+    query = parsed_url.query.replace('?', '&')
+    query_params = parse_qs(query, keep_blank_values=True)
 
     # Remove csrfToken entirely
     query_params.pop('csrfToken', None)
